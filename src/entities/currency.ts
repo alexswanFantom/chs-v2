@@ -12,6 +12,8 @@ export class Currency {
   public readonly decimals: number
   public readonly symbol?: string
   public readonly name?: string
+  public readonly isNativeToken: true = true;
+  public readonly isToken: false = false;
 
   /**
    * The only instance of the base class `Currency`.

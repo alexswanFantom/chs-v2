@@ -7,6 +7,8 @@ export declare class Currency {
     readonly decimals: number;
     readonly symbol?: string;
     readonly name?: string;
+    readonly isNativeToken: true;
+    readonly isToken: false;
     /**
      * The only instance of the base class `Currency`.
      */

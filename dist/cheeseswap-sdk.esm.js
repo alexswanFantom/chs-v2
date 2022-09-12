@@ -360,6 +360,8 @@ var Currency =
  * @param name of the currency
  */
 function Currency(decimals, symbol, name) {
+  this.isNativeToken = true;
+  this.isToken = false;
   validateSolidityTypeInstance(JSBI.BigInt(decimals), SolidityType.uint8);
   this.decimals = decimals;
   this.symbol = symbol;
@@ -432,7 +434,7 @@ function currencyEquals(currencyA, currencyB) {
   } else if (currencyB instanceof Token) {
     return false;
   } else {
-    return currencyA === currencyB;
+    return currencyA.isNativeToken === currencyB.isNativeToken;
   }
 }
 var WETH = (_WETH = {}, _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0xB7ddC6414bf4F5515b52D8BdD69973Ae205ff101', 18, 'WWDOGE', 'Wrapped WDOGE'), _WETH[ChainId.BSCTESTNET] = /*#__PURE__*/new Token(ChainId.BSCTESTNET, '0xaE8E19eFB41e7b96815649A6a60785e1fbA84C1e', 18, 'WBNB', 'Wrapped BNB'), _WETH);
@@ -1337,7 +1339,7 @@ var Trade = /*#__PURE__*/function () {
         amountIn = _pair$getInputAmount2[0];
       } catch (error) {
         // not enough liquidity in this pair
-        if (error.isInsufficientReservesError) {
+        if (error.isInsufficientInputAmountError) {
           continue;
         }
 
